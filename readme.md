@@ -194,3 +194,36 @@ ___
     FROM hourly_sale
     GROUP BY shift;
     ```
+
+### **4. Findings**
+
+* Customers span multiple demographics
+* Some transactions exceed 1000 → premium purchases
+* Seasonal sales patterns visible in monthly trends
+* Top customers and best-selling categories identified
+___
+
+## 📊 Example Insights
+
+* **High-Value Purchases:** Transactions above 1000 show premium product demand.
+* **Customer Behavior:** Unique customer counts per category help identify loyal segments.
+* **Sales Trends:** Monthly and shift-based analysis reveal when customers shop most.
+* **Category Performance:** Clothing and Beauty stand out among popular product categories.
+___
+## 📁 Reports
+
+* **Sales Summary:** Total sales, demographics, and category performance
+* **Trend Analysis:** Monthly peaks and daily shift sales patterns
+* **Customer Insights:** Top customers and loyalty by category
+___
+
+## 🧑‍💻 Tech Stack
+
+* **Database:** PostgreSQL / MySQL (works with any SQL database)
+* **Language:** SQL
+
+## ✅ Conclusion
+
+This project gives beginners hands-on experience with SQL for data analysis. By setting up a database, cleaning data, and answering business-driven questions, it provides a solid foundation for anyone starting their journey into **data analytics.**
+
+📌 Feel free to fork this repo, practice the queries, and build on top of it!
