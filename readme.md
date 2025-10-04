@@ -133,8 +133,34 @@ ___
     GROUP BY category;
     ```
 5. Write a SQL query to find all transactions where the total_sale is greater than 1000:
+    ```sql
+    SELECT *
+    FROM retail_sells
+    WHERE total_sale > 1000;
+    ```
 6. Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category:
+    ```sql
+    SELECT category,
+           gender,
+           COUNT(transactions_id) AS number_of_transaction
+    FROM retail_sells
+    GROUP BY category, gender
+    ORDER BY category;
+    ```
 7. Write a SQL query to calculate the average sale for each month. Find out the best-selling month in each year:
+    ```sql
+    SELECT *
+    FROM (SELECT YEAR (sale_date) AS year, 
+        MONTH (sale_date) AS month, 
+        AVG (total_sale) AS avg_sale, 
+        RANK() OVER (
+              PARTITION BY YEAR (sale_date)
+              ORDER BY AVG (total_sale) DESC
+              ) AS rank_in_year
+        FROM retail_sells
+        GROUP BY YEAR (sale_date), MONTH (sale_date)) as t1
+    WHERE t1.rank_in_year = 1;
+    ```
 8. Write a SQL query to find the top 5 customers based on the highest total sales:
 9. Write a SQL query to find the number of unique customers who purchased items from each category:
 10. Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17):
