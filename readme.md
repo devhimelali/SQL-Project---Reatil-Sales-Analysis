@@ -27,13 +27,13 @@ ___
 
 ### 1. **Database Setup:**
 
-* Create sql_retail_sales_analysis database
+* Create `sql_retail_sales_analysis` database
      ```sql
      CREATE
      DATABASE sql_retail_sales_analysis;
      ```
 
-* Create retail_sales table with fields like `transactions_id`, `sale_date`, `sale_time`, `customer_id`, `gender`,
+* Create `retail_sales` table with fields like `transactions_id`, `sale_date`, `sale_time`, `customer_id`, `gender`,
   `age`, `category`, `quantity`, `price_per_unit`, `cogs`, `total_sale`.
      ```sql
      CREATE TABLE retail_sales (
@@ -111,7 +111,7 @@ ___
 2. Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022:
     ```sql
     SELECT *
-    FROM retail_sells
+    FROM retail_sales
     WHERE category = 'Clothing'
       AND quantiy > 3
       AND DATE_FORMAT(sale_date, '%m-%Y') = '11-2022';
@@ -121,7 +121,7 @@ ___
     SELECT category,
         SUM(total_sale) AS total_sale,
         COUNT(*) AS total_order
-    FROM retail_sells
+    FROM retail_sales
     GROUP BY category;
     ```
 4. Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category:
@@ -129,13 +129,13 @@ ___
     SELECT category,
        SUM(total_sale) AS total_sale,
        COUNT(*) AS total_order
-    FROM retail_sells
+    FROM retail_sales
     GROUP BY category;
     ```
 5. Write a SQL query to find all transactions where the total_sale is greater than 1000:
     ```sql
     SELECT *
-    FROM retail_sells
+    FROM retail_sales
     WHERE total_sale > 1000;
     ```
 6. Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category:
@@ -143,7 +143,7 @@ ___
     SELECT category,
            gender,
            COUNT(transactions_id) AS number_of_transaction
-    FROM retail_sells
+    FROM retail_sales
     GROUP BY category, gender
     ORDER BY category;
     ```
@@ -157,7 +157,7 @@ ___
               PARTITION BY YEAR (sale_date)
               ORDER BY AVG (total_sale) DESC
               ) AS rank_in_year
-        FROM retail_sells
+        FROM retail_sales
         GROUP BY YEAR (sale_date), MONTH (sale_date)) as t1
     WHERE t1.rank_in_year = 1;
     ```
@@ -166,7 +166,7 @@ ___
     SELECT
         customer_id,
         SUM(total_sale) as total_sales
-    FROM retail_sells
+    FROM retail_sales
     GROUP BY customer_id
     ORDER BY total_sales DESC
     LIMIT 5
@@ -175,7 +175,7 @@ ___
     ```sql
     SELECT category,
            COUNT(DISTINCT customer_id) AS unique_customer
-    FROM retail_sells
+    FROM retail_sales
     GROUP BY category;
     ```
 10. Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17):
@@ -188,7 +188,7 @@ ___
                          WHEN EXTRACT(HOUR FROM sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
                          ELSE 'Evening'
                          END as shift
-              FROM retail_sells)
+              FROM retail_sales)
     SELECT shift,
            COUNT(*) as total_orders
     FROM hourly_sale
