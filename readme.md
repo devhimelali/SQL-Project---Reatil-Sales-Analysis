@@ -43,5 +43,50 @@ ___
             price_per_unit FLOAT,
             cogs FLOAT,
             total_sale FLOAT
+        );
         ```
-     
+### 2. **Data Exploration & Cleaning:**
+* **Record count:-**
+     ```sql
+     SELECT COUNT(*)
+     FROM retail_sales;
+     ```
+* **Unique customer and category counts:-**
+    ```sql
+    -- Unique customer count
+    SELECT COUNT(DISTINCT customer_id)
+    FROM retail_sales;
+    
+    -- Unique category count
+    SELECT DISTINCT category
+    FROM retail_sales;
+    ```
+
+* **Null value checks and clean-up:-**
+    ```sql
+    -- Null value checks
+    SELECT *
+    FROM retail_sales
+    WHERE sale_date IS NULL
+       OR sale_time IS NULL
+       OR customer_id IS NULL
+       OR gender IS NULL
+       OR age IS NULL
+       OR category IS NULL
+       OR quantity IS NULL
+       OR price_per_unit IS NULL
+       OR cogs IS NULL;
+    
+    -- Null value clean-up
+    DELETE
+    FROM retail_sales
+    WHERE sale_date IS NULL
+       OR sale_time IS NULL
+       OR customer_id IS NULL
+       OR gender IS NULL
+       OR age IS NULL
+       OR category IS NULL
+       OR quantity IS NULL
+       OR price_per_unit IS NULL
+       OR cogs IS NULL;
+    ```
