@@ -1,5 +1,4 @@
 # 🛒 Retail Sales Analysis (SQL Project)
-___
 ## 📌 Project Overview
 
 This project demonstrates how SQL can be used to explore, clean, and analyze retail sales data.
