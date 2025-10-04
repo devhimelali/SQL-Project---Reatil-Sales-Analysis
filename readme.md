@@ -162,5 +162,35 @@ ___
     WHERE t1.rank_in_year = 1;
     ```
 8. Write a SQL query to find the top 5 customers based on the highest total sales:
+    ```sql
+    SELECT
+        customer_id,
+        SUM(total_sale) as total_sales
+    FROM retail_sells
+    GROUP BY customer_id
+    ORDER BY total_sales DESC
+    LIMIT 5
+    ```
 9. Write a SQL query to find the number of unique customers who purchased items from each category:
+    ```sql
+    SELECT category,
+           COUNT(DISTINCT customer_id) AS unique_customer
+    FROM retail_sells
+    GROUP BY category;
+    ```
 10. Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17):
+    ```sql
+    WITH hourly_sale
+             AS
+             (SELECT *,
+                     CASE
+                         WHEN EXTRACT(HOUR FROM sale_time) < 12 THEN 'Morning'
+                         WHEN EXTRACT(HOUR FROM sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
+                         ELSE 'Evening'
+                         END as shift
+              FROM retail_sells)
+    SELECT shift,
+           COUNT(*) as total_orders
+    FROM hourly_sale
+    GROUP BY shift;
+    ```
